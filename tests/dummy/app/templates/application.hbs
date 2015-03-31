@@ -1,3 +1,5 @@
 <h2 id="title">Welcome to Ember.js</h2>
 
-{{outlet}}
+{{#table-grid-2d rowNames=rowNames colNames=colNames data=data as |cell|}}
+  <span>{{cell.id}}</span>
+{{/table-grid-2d}}

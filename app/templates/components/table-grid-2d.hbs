@@ -1,0 +1,19 @@
+
+<thead>
+  <tr>
+    {{#each colName in colNames}}
+      <th>{{colName}}</th>
+    {{/each}}
+  </tr>
+</thead>
+
+<tbody>
+  {{#each row in rows}}
+    <tr>
+      <td class="row-name">{{row.rowName}}</td>
+      {{#each cell in row.cells}}
+        <td {{action "touch" cell}}>{{yield cell}}</td>
+      {{/each}}
+    </tr>
+  {{/each}}
+</tbody>

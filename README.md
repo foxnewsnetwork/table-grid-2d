@@ -1,6 +1,10 @@
 # Table-grid-2d
 
-This README outlines the details of collaborating on this Ember addon.
+Generates a spreadsheet-like table grid for representating junk that's naturally spreadsheet-like
+
+```emblem
+table-grid-2d colNames=colNames rowNames=rowNames data=warehouses cellKey="coordinate" action="cellTouched"
+```
 
 ## Installation
 
