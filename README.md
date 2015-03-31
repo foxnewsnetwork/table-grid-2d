@@ -18,7 +18,7 @@ And you wanted your comrades in sort of bingo-grid spreadsheet table, do the fol
 ```handlebars
 {{#table-grid-2d colNames=colNames rowNames=rowNames data=comrades originLabel="☭" action="cellTouched" as |comrade|}}
   <span>{{comrade.id}}</span>
-{{/end}}
+{{/table-grid-2d}}
 ```
 
 to get:
