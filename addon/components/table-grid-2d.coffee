@@ -4,6 +4,7 @@
 TableGrid2dComponent = Ember.Component.extend
   tagName: "table"
   classNames: ["table-grid-2d"]
+  originLabel: "#"
 
   rows: Ember.computed "data.@each", "rowNames.@each", "colNames.@each", ->
     return if Ember.isBlank @get "data"

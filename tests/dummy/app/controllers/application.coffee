@@ -10,11 +10,11 @@ objectify = ([colName, rowName]) ->
   id: [colName, rowName].join("-")
 
 ApplicationController = Ember.Controller.extend
-  rowNames: [1..6]
-  colNames: "abcdefg".split("").map (x) -> name: x
+  rowNames: Ember.A [1..6]
+  colNames: Ember.A "abcdefg".split("")
   data: Ember.computed "rowNames.@each", "colNames.@each", ->
     colNames = @get "colNames"
     rowNames = @get "rowNames"
-    zip(colNames, rowNames).map objectify
+    Ember.A zip(colNames, rowNames).map objectify
 
 `export default ApplicationController`

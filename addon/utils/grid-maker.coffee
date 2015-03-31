@@ -15,7 +15,7 @@ class Row
   inOrderOf: (@colNames) -> @
 
   withItems: (items) ->
-    @cells = @assignInOrder items
+    @cells = Ember.A @assignInOrder items
     @
 
   toString: ->
@@ -38,7 +38,7 @@ rowFilter = (rowName, xs) ->
   xs.filter (x) -> get(x, rowNameKey) is rowName
 
 gridMaker = (data: xs, colNames: colNames, rowNames: rowNames) ->
-  rowNames.map (rowName) ->
+  Ember.A rowNames.map (rowName) ->
     Row.named(rowName).inOrderOf(colNames).withItems rowFilter rowName, xs
 
 `export default gridMaker`
