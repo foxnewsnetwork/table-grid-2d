@@ -11,7 +11,7 @@ objectify = ([colName, rowName]) ->
 
 ApplicationController = Ember.Controller.extend
   rowNames: [1..6]
-  colNames: "abcdefg".split("")
+  colNames: "abcdefg".split("").map (x) -> name: x
   data: Ember.computed "rowNames.@each", "colNames.@each", ->
     colNames = @get "colNames"
     rowNames = @get "rowNames"
