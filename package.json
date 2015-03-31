@@ -40,9 +40,7 @@
     "spreadsheet"
   ],
   "dependencies": {
-    "ember-cli-babel": "^4.0.0",
-    "ember-cli-coffeescript": "0.10.0",
-    "ember-cli-emblem-hbs-printer": "^0.2.1"
+    "ember-cli-babel": "^4.0.0"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
