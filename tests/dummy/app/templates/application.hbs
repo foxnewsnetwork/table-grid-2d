@@ -1,11 +1,7 @@
 <h2 id="title">Welcome to Ember.js</h2>
 
 <ul>
-  {{#each rowName in rowNames}}
-    <li>{{rowName}}</li>
+  {{#each colName in colNames}}
+    <li>{{colName}}</li>
   {{/each}}
 </ul>
-
-{{#table-grid-2d rowNames=rowNames colNames=colNames data=data as |cell|}}
-  <span>{{cell.id}}</span>
-{{/table-grid-2d}}
