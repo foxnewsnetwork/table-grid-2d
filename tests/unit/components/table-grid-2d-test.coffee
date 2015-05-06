@@ -61,6 +61,6 @@ test 'given a dataset that is highly delayed, it should still work', (assert) ->
       assert.ok row.cells, "each row should have cells"
       assert.equal row.cells.get("length"), 4, "each row should have 4 cells"
       console.log row.toString()
-    assert.equal cells.get("length"), 4, "there should be 4 cells"
+    
 
           
