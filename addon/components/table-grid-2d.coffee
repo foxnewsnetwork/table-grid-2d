@@ -6,9 +6,11 @@ TableGrid2dComponent = Ember.Component.extend
   classNames: ["table-grid-2d"]
   originLabel: "#"
 
-  rows: Ember.computed "data.@each", "rowNames.@each", "colNames.@each", ->
+  rowsPromise: Ember.computed "data.@each.colName", "data.@each.colName", "rowNames.@each", "colNames.@each", ->
     return if Ember.isBlank @get "data"
     gridMaker data: @get("data"), colNames: @get("colNames"), rowNames: @get("rowNames")
+    .then (rows) =>
+      @set "rows", Ember.A rows
 
   actions:
     touch: (cell) ->

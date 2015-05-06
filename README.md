@@ -1,4 +1,5 @@
 # Table-grid-2d
+[![Build Status](https://travis-ci.org/foxnewsnetwork/table-grid-2d.svg)](https://travis-ci.org/foxnewsnetwork/table-grid-2d)
 
 Generates a spreadsheet-like table grid for representating junk that's naturally spreadsheet-like
 

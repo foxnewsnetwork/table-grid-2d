@@ -1,10 +1,9 @@
 `import Ember from 'ember'`
+`import { promiseFilterBy, zip, asyncMapBy, reduceBuild, lll, asyncMap } from './prelude'`
 
 get = Ember.get
 colNameKey = "colName"
 rowNameKey = "rowName"
-reduceBuild = (xs, reducer) ->
-  xs.reduce reducer, {}
 
 class Row
   @named = (name) ->
@@ -14,9 +13,12 @@ class Row
 
   inOrderOf: (@colNames) -> @
 
-  withItems: (items) ->
-    @cells = Ember.A @assignInOrder items
-    @
+  withItems: (itemsPromise) ->
+    itemsPromise.then (items) =>
+      @assignInOrder items
+    .then (cells) =>
+      @cells = Ember.A cells
+      @
 
   toString: ->
     content = @cells
@@ -25,20 +27,24 @@ class Row
     @rowName + " | " + content
 
   assignInOrder: (items) ->
-    hash = @buildColNameHash items
-    @colNames.map (colName) -> hash[colName]
+    @buildColNameHash items
+    .then (hash) =>
+      @colNames.map (colName) -> hash[colName]
 
   buildColNameHash: (items) ->
-    reduceBuild items, (hash, item) =>
-      colName = get item, colNameKey
-      hash[colName] = item
-      hash
+    asyncMapBy items, colNameKey
+    .then (colNames) ->
+      zip items, colNames
+    .then (namesNItems) ->
+      reduceBuild namesNItems, (hash, [item, colName]) ->
+        hash[colName] = item
+        hash
 
-rowFilter = (rowName, xs) ->
-  xs.filter (x) -> get(x, rowNameKey) is rowName
+rowFilter = (expectedRowName, xs) ->
+  promiseFilterBy xs, rowNameKey, expectedRowName
 
 gridMaker = (data: xs, colNames: colNames, rowNames: rowNames) ->
-  Ember.A rowNames.map (rowName) ->
+  asyncMap rowNames, (rowName) ->
     Row.named(rowName).inOrderOf(colNames).withItems rowFilter rowName, xs
 
 `export default gridMaker`

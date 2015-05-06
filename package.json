@@ -1,6 +1,6 @@
 {
   "name": "table-grid-2d",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Ember component for creating a spreadsheet-like grid out of an array of positions",
   "directories": {
     "doc": "doc",

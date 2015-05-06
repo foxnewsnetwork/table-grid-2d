@@ -1,11 +1,21 @@
 <h2 id="title">Welcome to Ember.js</h2>
 
 <ul>
+  {{#each x in badJunk}}
+    <li>{{x}}</li>
+  {{/each}}
+</ul>
+
+<ul>
   {{#each rowName in rowNames}}
     <li>{{rowName}}</li>
   {{/each}}
 </ul>
 
 {{#table-grid-2d rowNames=rowNames colNames=colNames data=data as |cell|}}
+  <span>{{cell.id}}</span>
+{{/table-grid-2d}}
+
+{{#table-grid-2d rowNames=rowNames colNames=colNames data=remoteData as |cell|}}
   <span>{{cell.id}}</span>
 {{/table-grid-2d}}

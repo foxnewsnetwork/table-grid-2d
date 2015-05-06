@@ -33,9 +33,10 @@ test 'it works', (assert) ->
   colNames = [1..5]
   rowNames = "abcdefg".split ""
   cells = product(colNames, rowNames).map cellularize
-  rows = gridMaker data: cells, colNames: colNames, rowNames: rowNames
-  consoleDrawTable colNames, rows
-  assert.equal rows.length, 7
+  gridMaker data: cells, colNames: colNames, rowNames: rowNames
+  .then (rows) ->
+    consoleDrawTable colNames, rows
+    assert.equal rows.length, 7
 
 test 'it should properly reflect missing cells', (assert) ->
   colNames = [1..5]
@@ -43,6 +44,7 @@ test 'it should properly reflect missing cells', (assert) ->
   cells = product(colNames, rowNames)
   .filter noOdds
   .map cellularize
-  rows = gridMaker data: cells, colNames: colNames, rowNames: rowNames
-  consoleDrawTable colNames, rows
-  assert.equal rows.length, 7  
+  gridMaker data: cells, colNames: colNames, rowNames: rowNames
+  .then (rows) ->
+    consoleDrawTable colNames, rows
+    assert.equal rows.length, 7  
