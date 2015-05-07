@@ -13,12 +13,19 @@ zipCore = (ax, ay) ->
 zip = (xs, ys) ->
   Ember.A zipCore xs, ys
 
+promiseFilter = (xs, polarizer) ->
+  asyncMap(xs, polarizer)
+  .then (decisions) ->
+    zip xs, decisions
+    .filter ([_, decision]) -> Ember.isPresent decision
+    .map ([x, _]) -> x
+
 promiseFilterBy = (xs, key, expectedValue) ->
-  asyncMapBy xs, key  
-  .then (actualValues) ->
+  asyncMapBy(xs, key)
+  .then (actualValues) -> 
     zip xs, actualValues
     .filter ([_, actualValue]) -> actualValue is expectedValue
-    .map ([x, _]) -> x
+    .map ([x, _]) -> x    
 
 asyncMapBy = (xs, field) ->
   asyncMap xs, (x) -> Ember.get x, field
@@ -43,6 +50,7 @@ lll = (x) ->
 class Prelude
   @zip = zip
   @promiseFilterBy = promiseFilterBy
+  @promiseFilter = promiseFilter
   @promiseLift = promiseLift
   @asyncMapBy = asyncMapBy
   @asyncMap = asyncMap
@@ -55,6 +63,7 @@ class Prelude
   promiseLift,
   zip,
   promiseFilterBy,
+  promiseFilter,
   lll,
   reduceBuild,
   asyncMapBy,

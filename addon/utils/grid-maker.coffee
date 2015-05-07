@@ -1,5 +1,5 @@
 `import Ember from 'ember'`
-`import { promiseFilterBy, zip, asyncMapBy, reduceBuild, lll, asyncMap } from './prelude'`
+`import { promiseFilter, zip, asyncMapBy, reduceBuild, lll, asyncMap } from './prelude'`
 
 get = Ember.get
 colNameKey = "colName"
@@ -41,7 +41,8 @@ class Row
         hash
 
 rowFilter = (expectedRowName, xs) ->
-  promiseFilterBy xs, rowNameKey, expectedRowName
+  promiseFilter xs, (x) ->
+    "#{get x, rowNameKey}".trim() is "#{expectedRowName}".trim()
 
 gridMaker = (data: xs, colNames: colNames, rowNames: rowNames) ->
   asyncMap rowNames, (rowName) ->
